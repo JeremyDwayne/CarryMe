@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @carry.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @carry.description %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @carry.carry_type %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @carry.price %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @carry.user.battletag %>
+</p>
+
+<%= link_to 'Edit', edit_carry_path(@carry) %> |
+<%= link_to 'Back', carries_path %>
