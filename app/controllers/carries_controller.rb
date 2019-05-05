@@ -5,8 +5,10 @@ class CarriesController < ApplicationController
   # GET /carries
   # GET /carries.json
   def index
-    @carries = Carry.all
-    puts current_user
+    columns_array = ["title", "description", "price", "carry_type"]
+    search = params[:carry].present? ? params[:carry][:search] : nil
+    puts "carries search: #{search}"
+    @carries = Carry.search(search, columns_array)
   end
 
   # GET /carries/1

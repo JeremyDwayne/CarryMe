@@ -10,6 +10,46 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar sticky-top navbar-dark bg-primary navbar-expand-lg">
+      <div class="container">
+        <%= link_to "CarryMe", root_path, class: "navbar-brand" %>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item <%= active_class(carries_path) %>">
+              <%= link_to "Carries", carries_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%# <%= link_to "Carries", carries_path, class: "nav-link" %1> %>
+              <a href="#" class="nav-link">Profile</a>
+            </li>
+          </ul>
+          <%= form_for :carry, url: carries_url, method: 'get', class: "form-inline my-2 my-lg-0" do |f| %>
+            <%= f.text_field(:search, placeholder: "Search Carries", class: "form-control mr-sm-2") %>
+            <%# <%= f.submit "Search", class: "btn btn-outline-success my-2 my-sm-0" %1> %>
+          <% end %>
+          &nbsp;
+          <% if !user_signed_in? %>
+            <%= link_to "Login", new_user_session_path, class: "btn btn-success my-2 my-sm-0" %>
+          <% else %>
+            <%= link_to "Logout", destroy_user_session_path, method: "delete", class: "btn btn-warning my-2 my-sm-0" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <div class="container">
+        <%= yield %>
+      </div>
+    </main>
+    <footer class="navbar bg-primary fixed-bottom">
+      <div class="container">
+        &copy; 2019 Jeremy Winterberg
+      </div>
+    </footer>
   </body>
 </html>
