@@ -1,6 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def bnet
     @user = User.from_omniauth(request.env["omniauth.auth"])
+    session[:bnet_access_token] = request.env["omniauth.auth"].credentials.token
 
     if @user.persisted?
       sign_in_and_redirect @user, event: :authentication

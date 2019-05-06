@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   devise :omniauthable, omniauth_providers: %i[bnet]
   has_many :carries
+  has_many :characters
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -17,6 +18,20 @@ class User < ApplicationRecord
     super.tap do |user|
       if data = session["devise.bnet_data"] && session["devise.bnet_data"]["extra"]["raw_info"]
         user.battletag = data["battletag"] if user.battletag.blank?
+      end
+    end
+  end
+
+  def sync_characters(response)
+    if response.present?
+      characters = response.reject {|c| c["level"] < 120 }
+      characters.each do |c|
+        self.characters.where(name: c["name"]).first_or_create do |character|
+          character.name = c["name"]
+          character.realm = c["realm"]
+          character.thumbnail = c["thumbnail"]
+          character.main = false
+        end
       end
     end
   end

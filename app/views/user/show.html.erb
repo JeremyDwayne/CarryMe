@@ -1,0 +1,31 @@
+<%= link_to "Sync Bnet Characters", { controller: "user", action: "sync_characters", remote: true }, class: "btn btn-primary m-1" %>
+<%= form_for :characters do |form| %>
+  <% @characters.each do |character| %>
+    <%= form.fields_for "characters[]", character do |f| %>
+      <div class="card mb-3">
+        <div class="row no-gutters">
+
+          <div class="col-md-1">
+            <%= image_tag "http://render-us.worldofwarcraft.com/character/#{character.thumbnail}", class: "card-img" %>
+          </div>
+
+          <div class="col-md-9">
+            <div class="card-body">
+              <h5 class="card-title"><%= character.name %></h5>
+              <%= character.realm %>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="card-body">
+              <%= f.check_box :main, class: "main-check", data: { toggle: "toggle", on: "Main", off: "Main", onstyle: "success", offstyle: "danger" } %>
+              <%# <input type="checkbox" class="check" data-toggle="toggle" data-on="Main" data-off="Main" data-onstyle="success" data-offstyle="danger"> %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <%= form.submit class: "btn btn-primary m-1" %>
+<% end %>

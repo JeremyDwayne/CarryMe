@@ -7,5 +7,10 @@ Rails.application.routes.draw do
     # get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
   end
 
+  resources :user, except: [:index, :new, :create]
+  post 'user/:id', to: 'characters#set_main'
+  resources :character, except: [:index, :new, :create]
+  get 'sync_characters', to: 'user#sync_characters'
+
   root 'pages#home'
 end

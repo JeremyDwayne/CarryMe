@@ -17,3 +17,13 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+// $(document).on('turbolinks:load', function(){
+//   $('input:checkbox').change(function(e){
+//     checkboxes = document.getElementsByClassName("main-check");
+//     console.log(checkboxes)
+//     for (var i=0, n=checkboxes.length; i< n;i++){
+//       console.log(checkboxes[i])
+//     }
+//   })
+// })

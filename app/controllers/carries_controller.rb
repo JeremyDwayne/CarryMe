@@ -1,13 +1,13 @@
 class CarriesController < ApplicationController
   before_action :set_carry, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :verify_owner, only: [:edit, :update, :destroy]
 
   # GET /carries
   # GET /carries.json
   def index
     columns_array = ["title", "description", "price", "carry_type"]
     search = params[:carry].present? ? params[:carry][:search] : nil
-    puts "carries search: #{search}"
     @carries = Carry.search(search, columns_array)
   end
 
@@ -74,5 +74,9 @@ class CarriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def carry_params
       params.require(:carry).permit(:title, :description, :carry_type, :price, :user_id)
+    end
+
+    def verify_owner
+      value = @carry.user == current_user
     end
 end
