@@ -19,11 +19,18 @@
 //= require_tree .
 
 // $(document).on('turbolinks:load', function(){
-//   $('input:checkbox').change(function(e){
-//     checkboxes = document.getElementsByClassName("main-check");
-//     console.log(checkboxes)
-//     for (var i=0, n=checkboxes.length; i< n;i++){
-//       console.log(checkboxes[i])
-//     }
-//   })
+  // function setMain(){
+  //   $(".character_check :target").submit(function(e){
+  //     e.preventDefault();
+  //     $.ajax({
+  //       type: 'PATCH',
+  //       url: "character/" + character_id,
+  //       data: {
+  //         character_id: id
+  //       }
+  //       });
+  //     return false;
+  //   })
+  //   $(".character_check :target").submit();
+  // }
 // })

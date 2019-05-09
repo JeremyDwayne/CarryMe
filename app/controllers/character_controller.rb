@@ -1,16 +1,17 @@
-class CharactersController < ApplicationController
+class CharacterController < ApplicationController
   before_action :set_character, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_character!, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
 
   # GET /characters/1
   # GET /characters/1.json
   def show
-    @characters = @character.characters
   end
 
   def set_main
-    characters = params["characters"]["characters"]
-    Character.update(characters.keys, characters.values)
+    puts params
+    # characters = params["characters"]["characters"]
+    # Character.update(characters.keys, characters.values)
+    redirect_to current_user
   end
 
   # GET /characters/1/edit
@@ -22,8 +23,8 @@ class CharactersController < ApplicationController
   def update
     respond_to do |format|
       if @character.update(character_params)
-        format.html { redirect_to @character, notice: 'Character was successfully updated.' }
-        format.json { render :show, status: :ok, location: @character }
+        format.html { redirect_to current_user, notice: 'Character was successfully updated.' }
+        format.json { render :show, status: :ok, location: current_user }
       else
         format.html { render :edit }
         format.json { render json: @character.errors, status: :unprocessable_entity }

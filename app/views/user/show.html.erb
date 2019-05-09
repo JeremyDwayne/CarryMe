@@ -1,7 +1,10 @@
 <%= link_to "Sync Bnet Characters", { controller: "user", action: "sync_characters", remote: true }, class: "btn btn-primary m-1" %>
-<%= form_for :characters do |form| %>
+<p>
+  Please toggle and save the character you wish to have displayed as your main.
+</p>
+<%# <%= form_for :characters do |form| %1> %>
   <% @characters.each do |character| %>
-    <%= form.fields_for "characters[]", character do |f| %>
+    <%# <%= form.fields_for "characters[]", character do |f| %1> %>
       <div class="card mb-3">
         <div class="row no-gutters">
 
@@ -18,14 +21,19 @@
 
           <div class="col-md-2">
             <div class="card-body">
-              <%= f.check_box :main, class: "main-check", data: { toggle: "toggle", on: "Main", off: "Main", onstyle: "success", offstyle: "danger" } %>
-              <%# <input type="checkbox" class="check" data-toggle="toggle" data-on="Main" data-off="Main" data-onstyle="success" data-offstyle="danger"> %>
+              <%= form_for character do |f| %>
+                <div class="ckbx-style-8">
+                  <h6>Main</h6>
+                  <%= f.check_box :main, id: "ckbx-style-8-#{character.id}", class: "character_check", onchange: "submit()" %>
+                  <label for="ckbx-style-8-<%= character.id %>"></label>
+                </div>
+              <% end %>
             </div>
           </div>
 
         </div>
       </div>
     <% end %>
-  <% end %>
-  <%= form.submit class: "btn btn-primary m-1" %>
-<% end %>
+  <%# <% end %1> %>
+  <%# <%= form.submit class: "btn btn-primary m-1" %1> %>
+<%# <% end %1> %>
