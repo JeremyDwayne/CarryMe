@@ -26,18 +26,28 @@ class User < ApplicationRecord
     if response.present?
       characters = response.reject {|c| c["level"] < 120 }
       characters.each do |c|
-        self.characters.where(name: c["name"]).first_or_create do |character|
+        char = self.characters.where(name: c["name"]).first_or_create do |character|
           character.name = c["name"]
           character.realm = c["realm"]
           character.thumbnail = c["thumbnail"]
           character.main = false
         end
+        char.update(raider_io: getIO(c["realm"], c["name"]))
       end
       main = self.characters.where(main: true).first
       if !main.present?
         self.characters.first.update(main: true)
       end
     end
+  end
+
+  def getIO(realm, name, region="us")
+    res = HTTParty.get("https://raider.io/api/v1/characters/profile?region=#{region}&realm=#{realm}&name=#{name}&fields=mythic_plus_scores")
+    res["mythic_plus_scores"]["all"]
+  end
+
+  def main_character
+    self.characters.where(main: true).first
   end
 
   def whisper

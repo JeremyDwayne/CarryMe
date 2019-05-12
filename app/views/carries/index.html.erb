@@ -2,11 +2,14 @@
 
 <div class="list-group">
   <% @carries.each do |carry| %>
+    <% main = carry.user.main_character %>
 
     <div href="#" class="list-group-item list-group-item-action">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1"><%= carry.title %></h5>
-        <small>Type: <%= carry.carry_type.capitalize %></small>
+        <small>Leader Raider.IO: <%= main.raider_io %>
+        &nbsp;
+        Type: <%= carry.carry_type.capitalize %></small>
       </div>
       <p class="mb-1"><%= carry.description %></p>
 
@@ -25,7 +28,7 @@
       <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-body">
-            <pre id="whisper-text-<%= carry.id %>">/w <%= carry.user.whisper %> Hi, I'm interested in your carry: "<%= carry.title %>" listed for: <%= wowGoldConverter(carry.price) %></pre>
+            <pre id="whisper-text-<%= carry.id %>">/w <%= main.name.downcase %>-<%= main.realm.downcase %> Hi, I'm interested in your carry: "<%= carry.title %>" starting at: <%= wowGoldConverter(carry.price) %></pre>
           </div>
         </div>
       </div>

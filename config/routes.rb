@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   resources :character, except: [:index, :new, :create]
   get 'sync_characters', to: 'user#sync_characters'
 
-  root 'pages#home'
+  root 'carries#index'
 end
