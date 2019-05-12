@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_12_032809) do
+ActiveRecord::Schema.define(version: 2019_05_12_045954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,11 +18,11 @@ ActiveRecord::Schema.define(version: 2019_05_12_032809) do
   create_table "carries", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.string "carry_type"
     t.integer "price"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "carry_type"
     t.index ["user_id"], name: "index_carries_on_user_id"
   end
 

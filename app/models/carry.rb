@@ -1,5 +1,7 @@
 class Carry < ApplicationRecord
   belongs_to :user
+  enum carry_type: [ :key, :raid, :pvp ]
+  validates :carry_type, inclusion: { in: Carry.carry_types, message: "%{value} must be assigned" }
 
   def self.search(search, columns = nil)
     if search.present?
