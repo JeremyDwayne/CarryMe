@@ -17,3 +17,17 @@
 @import "variables";
 @import "bootstrap";
 @import "checkboxes.min";
+
+
+// .list-group-item.list-group-item-action {
+//   color: $white;
+// }
+
+a {
+  // &:visited {
+  //   color: $success;
+  // }
+  &:hover {
+    background-color: transparent;
+  }
+}

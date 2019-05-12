@@ -8,7 +8,7 @@ class CarriesController < ApplicationController
   def index
     columns_array = ["title", "description", "price", "carry_type"]
     search = params[:carry].present? ? params[:carry][:search] : nil
-    @carries = Carry.search(search, columns_array)
+    @carries = Carry.search(search, columns_array).order(:created_at)
   end
 
   # GET /carries/1

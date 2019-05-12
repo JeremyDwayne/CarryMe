@@ -18,7 +18,7 @@
 //= require turbolinks
 //= require_tree .
 
-// $(document).on('turbolinks:load', function(){
+// $(document).on('turbolinks:load', function(){ 
   // function setMain(){
   //   $(".character_check :target").submit(function(e){
   //     e.preventDefault();

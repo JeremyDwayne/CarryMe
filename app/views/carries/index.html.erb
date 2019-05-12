@@ -1,31 +1,37 @@
 <h1>Carries</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Price</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="list-group">
+  <% @carries.each do |carry| %>
 
-  <tbody>
-    <% @carries.each do |carry| %>
-      <tr>
-        <td><%= carry.title %></td>
-        <td><%= carry.description %></td>
-        <td><%= carry.carry_type %></td>
-        <td><%= carry.price %></td>
-        <td><%= link_to 'Show', carry %></td>
-        <td><%= link_to 'Edit', edit_carry_path(carry) %></td>
-        <td><%= link_to 'Destroy', carry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <div href="#" class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1"><%= carry.title %></h5>
+        <small>Type: <%= carry.carry_type.capitalize %></small>
+      </div>
+      <p class="mb-1"><%= carry.description %></p>
 
-<br>
+      <small>Starting Price: <%= wowGoldConverter(carry.price) %></small>
+      <% if user_signed_in? && owned?(carry) %>
+        <div class="float-right">
+          <%= link_to 'Edit', edit_carry_path(carry) %>
+          <%= link_to 'Delete', carry, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      <% end %>
 
-<%= link_to 'New Carry', new_carry_path %>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#whisperModal-<%= carry.id %>">
+        Message
+      </button>
+
+    </div>
+
+    <div class="modal fade" id="whisperModal-<%= carry.id %>" tabindex="-1" role="dialog" aria-labelledby="whisperModalLabel-<%= carry.id %>" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <pre id="whisper-text-<%= carry.id %>">/w <%= carry.user.whisper %> Hi, I'm interested in your carry: "<%= carry.title %>" listed for: <%= wowGoldConverter(carry.price) %></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

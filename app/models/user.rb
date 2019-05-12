@@ -35,4 +35,13 @@ class User < ApplicationRecord
       end
     end
   end
+
+  def whisper
+    main = self.characters.where(main: true).first
+    if main.present?
+      "#{main.name.downcase}-#{main.realm.downcase}"
+    else
+      "User has not set a main"
+    end
+  end
 end

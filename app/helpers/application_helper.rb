@@ -10,4 +10,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def wowGoldConverter(price)
+    number_to_human(price, units: {unit: "g", thousand: "k", million: "m"})
+  end
 end
