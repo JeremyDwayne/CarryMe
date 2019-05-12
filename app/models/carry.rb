@@ -24,7 +24,7 @@ class Carry < ApplicationRecord
       end
       self.where(sql.join(" AND "), params)
     else
-      self.all``
+      self.all
     end
   end
 end
