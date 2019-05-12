@@ -14,6 +14,9 @@ class Carry < ApplicationRecord
 
         statements = []
         for column in columns
+          if column == "carry_type"
+            statements << "#{column} = #{Carry.carry_types[sanitize_sql(s)]}" 
+          end
           statements << "UPPER(CAST(#{column} AS text)) LIKE UPPER(:nth#{i})"
         end
 
@@ -21,7 +24,7 @@ class Carry < ApplicationRecord
       end
       self.where(sql.join(" AND "), params)
     else
-      self.all
+      self.all``
     end
   end
 end
