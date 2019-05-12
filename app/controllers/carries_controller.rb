@@ -2,6 +2,7 @@ class CarriesController < ApplicationController
   before_action :set_carry, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :verify_owner, only: [:edit, :update, :destroy]
+  before_action :has_main, only: [:new, :create, :update, :edit]
 
   # GET /carries
   # GET /carries.json
@@ -77,6 +78,12 @@ class CarriesController < ApplicationController
     end
 
     def verify_owner
-      value = @carry.user == current_user
+      @carry.user == current_user
+    end
+    
+    def has_main
+      if !current_user.characters.present?
+        redirect_to current_user, alert: 'You must have a character synced and set as your main before creating a carry!'
+      end
     end
 end

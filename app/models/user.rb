@@ -33,6 +33,10 @@ class User < ApplicationRecord
           character.main = false
         end
       end
+      main = self.characters.where(main: true).first
+      if !main.present?
+        self.characters.first.update(main: true)
+      end
     end
   end
 

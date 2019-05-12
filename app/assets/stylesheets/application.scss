@@ -23,10 +23,14 @@
 //   color: $white;
 // }
 
+.btn:visited {
+    color: $white;
+}
+
 a {
-  // &:visited {
-  //   color: $success;
-  // }
+  &:visited {
+    color: $primary;
+  }
   &:hover {
     background-color: transparent;
   }

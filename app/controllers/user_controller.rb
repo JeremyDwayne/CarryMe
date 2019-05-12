@@ -1,6 +1,7 @@
 class UserController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
+  after_action :sync_characters, only: [:create]
 
   # GET /users/1
   # GET /users/1.json

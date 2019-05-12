@@ -11,17 +11,14 @@
       <p class="mb-1"><%= carry.description %></p>
 
       <small>Starting Price: <%= wowGoldConverter(carry.price) %></small>
-      <% if user_signed_in? && owned?(carry) %>
-        <div class="float-right">
+
+      <div class="float-right">
+        <% if user_signed_in? && owned?(carry) %>
           <%= link_to 'Edit', edit_carry_path(carry) %>
           <%= link_to 'Delete', carry, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </div>
-      <% end %>
-
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#whisperModal-<%= carry.id %>">
-        Message
-      </button>
-
+        <% end %>
+        <a data-toggle="modal" data-target="#whisperModal-<%= carry.id %>" href="#">Whisper</a>
+      </div>
     </div>
 
     <div class="modal fade" id="whisperModal-<%= carry.id %>" tabindex="-1" role="dialog" aria-labelledby="whisperModalLabel-<%= carry.id %>" aria-hidden="true">
