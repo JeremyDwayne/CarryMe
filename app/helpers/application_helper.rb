@@ -1,12 +1,13 @@
 module ApplicationHelper
-  def active_class(link_path) 
-    if current_page? link_path
-      "active"
-    elsif request.fullpath.include? link_path
-      if current_page? request.fullpath
-        if link_path =~ /\/.+/
+  def active_class(search, link_path) 
+    path = request.fullpath
+    if path.include? link_path
+      if search.present?
+        if path.include?(search)
           "active"
         end
+      elsif current_page? link_path
+        "active"
       end
     end
   end

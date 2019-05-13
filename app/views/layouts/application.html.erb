@@ -24,20 +24,20 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item <%= active_class(carries_path) %>">
+            <li class="nav-item <%= active_class("key", carries_path) %>">
               <%= link_to "Keys", carries_path(carry: {search: "key"}), class: "nav-link" %>
             </li>
-            <li class="nav-item <%= active_class(carries_path) %>">
+            <li class="nav-item <%= active_class("raid", carries_path) %>">
               <%= link_to "Raids", carries_path(carry: {search: "raid"}), class: "nav-link" %>
             </li>
-            <li class="nav-item <%= active_class(carries_path) %>">
+            <li class="nav-item <%= active_class("pvp", carries_path) %>">
               <%= link_to "PvP", carries_path(carry: {search: "pvp"}), class: "nav-link" %>
             </li>
             <% if user_signed_in? %>
-              <li class="nav-item">
+              <li class="nav-item <%= active_class("", user_path(current_user)) %>">
                 <%= link_to "Profile", current_user, class: "nav-link" %>
               </li>
-              <li class="nav-item <%= active_class(new_carry_path) %>">
+              <li class="nav-item <%= active_class("", new_carry_path) %>">
                 <%= link_to "Add Carry", new_carry_path, class: "nav-link" %>
               </li>
             <% end %>
@@ -47,13 +47,50 @@
           <% end %>
           &nbsp;
           <% if !user_signed_in? %>
-            <%= link_to "Login", new_user_session_path, class: "btn btn-success my-2 my-sm-0" %>
+            <%= link_to "Login", new_user_session_path, class: "btn btn-success my-2 my-sm-0", data: { toggle: "modal", target: "#loginModal" } %>
           <% else %>
             <%= link_to "Logout", destroy_user_session_path, method: "delete", class: "btn btn-warning my-2 my-sm-0" %>
           <% end %>
         </div>
       </div>
     </nav>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="row align-items-center">
+              <div class="col-sm">
+              <%= form_for(:user, :url => session_path(:user)) do |f| %>
+                <div class="field">
+                  <%= f.label :email %><br />
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                </div>
+
+                <div class="field">
+                  <%= f.label :password %><br />
+                  <%= f.password_field :password, autocomplete: "current-password" %>
+                </div>
+
+                <div class="field">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+
+                <div class="actions">
+                  <%= f.submit "Log in", class: "btn btn-primary" %>
+                </div>
+              <% end %>
+            </div>
+            <div class="col-sm">
+              <%= link_to "Sign in with Bnet", omniauth_authorize_path(:user, 'bnet'), class: "btn btn-info" %>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <main>
       <div class="container">
         <% flash.each do |name, msg| %>
