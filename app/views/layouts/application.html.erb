@@ -55,41 +55,44 @@
       </div>
     </nav>
 
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="row align-items-center">
+    <% if !user_signed_in? %>
+      <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="row align-items-center">
+                <div class="col-sm">
+                <%= form_for(:user, :url => session_path(:user)) do |f| %>
+                  <div class="field">
+                    <%= f.label :email %><br />
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.label :password %><br />
+                    <%= f.password_field :password, autocomplete: "current-password" %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :remember_me %>
+                  </div>
+
+                  <div class="actions">
+                    <%= f.submit "Log in", class: "btn btn-primary" %>
+                  </div>
+                <% end %>
+                <%= link_to "Sign Up", new_user_registration_path %>
+              </div>
               <div class="col-sm">
-              <%= form_for(:user, :url => session_path(:user)) do |f| %>
-                <div class="field">
-                  <%= f.label :email %><br />
-                  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-                </div>
-
-                <div class="field">
-                  <%= f.label :password %><br />
-                  <%= f.password_field :password, autocomplete: "current-password" %>
-                </div>
-
-                <div class="field">
-                  <%= f.check_box :remember_me %>
-                  <%= f.label :remember_me %>
-                </div>
-
-                <div class="actions">
-                  <%= f.submit "Log in", class: "btn btn-primary" %>
-                </div>
-              <% end %>
+                <%= link_to "Sign in with Bnet", omniauth_authorize_path(:user, 'bnet'), class: "btn btn-info" %>
+              </div>
             </div>
-            <div class="col-sm">
-              <%= link_to "Sign in with Bnet", omniauth_authorize_path(:user, 'bnet'), class: "btn btn-info" %>
             </div>
-          </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
 
     <main>
       <div class="container">
@@ -105,8 +108,32 @@
       </div>
     </main>
     <footer class="navbar bg-primary fixed-bottom">
-      <div class="container">
-        &copy; 2019 Jeremy Winterberg
+      <div class="container text-white">
+        <div class="row align-items-center">
+          <div class="col-sm">
+            <small>
+              CarryMe &copy;2019 <a class="text-white" href="https://www.jeremydwayne.com">JeremyDwayne</a> of <a class="text-white" href="http://www.death-jesters.net">Death Jesters</a>
+            </small>
+            </br>
+            <small>
+              <a href="https://www.twitter.com/jeremydwayne" alt="twitter.com" class="text-white"><i class="fab fa-twitter fa-2x"></i></a>&nbsp;&nbsp;
+              <a href="https://discord.gg/zwsSEp2" alt="discord" class="text-white"><i class="fab fa-discord fa-2x"></i></a>&nbsp;&nbsp;&nbsp;
+              <a href="https://www.patreon.com/jeremydwayne" alt="patreon" class="text-white"><i class="fab fa-patreon fa-2x"></i></a> 
+            </small>
+            </br>
+            <small>
+              <a href="#" class="text-white">Terms of Use</a>&nbsp;&nbsp;|&nbsp;
+              <a href="#" class="text-white">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;
+              <a href="#" class="text-white">Cookies Policy</a>
+            </small>
+
+          </div>
+          <div class="col-sm">
+            <small>
+            World of Warcraft, Warcraft and Blizzard Entertainment are trademarks or registered trademarks of Blizzard Entertainment, Inc. in the U.S. and/or other countries.
+          </small>
+          </div>
+        </div>
       </div>
     </footer>
   </body>
