@@ -22,6 +22,13 @@ class User < ApplicationRecord
     end
   end
 
+  def link_account_from_omniauth(auth)
+    self.provider = auth.provider
+    self.uid = auth.uid
+    self.battletag = auth.info.battletag
+    self.save
+  end
+
   def sync_characters(response)
     if response.present?
       characters = response.reject {|c| c["level"] < 120 }

@@ -16,6 +16,7 @@ class UserController < ApplicationController
       headers: { "Authorization": "Bearer #{session[:bnet_access_token]}" }
     }).parsed_response["characters"]
     current_user.sync_characters(@response)
+    redirect_to current_user
   end
 
   # GET /users/1/edit

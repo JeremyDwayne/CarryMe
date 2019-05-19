@@ -1,4 +1,8 @@
-<%= link_to "Sync Bnet Characters", { controller: "user", action: "sync_characters", remote: true }, class: "btn btn-primary m-1" %>
+<% if current_user.uid.nil? %>
+  <%= link_to "Connect Bnet", omniauth_authorize_path(:user, 'bnet'), class: "btn btn-primary m-1" %>
+<% else %>
+  <%= link_to "Sync Bnet", { controller: "user", action: "sync_characters", remote: true }, class: "btn btn-primary m-1" %>
+<% end %>
 <p>
   Please toggle and save the character you wish to have displayed as your main.
 </p>
@@ -13,7 +17,7 @@
 
       <div class="col-md-9">
         <div class="card-body">
-          <h5 class="card-title"><%= character.name %></h5>
+          <h5 class="card-title"><%= character.name %> - <%= character.raider_io %> io</h5>
           <%= character.realm %>
         </div>
       </div>

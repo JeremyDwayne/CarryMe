@@ -10,6 +10,7 @@ module CarryMe
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    # config.autoloader = :classic
     config.generators.javascript_engine = :js
 
     # Settings in config/environments/* take precedence over those specified here.

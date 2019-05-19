@@ -5,7 +5,7 @@
         &nbsp;
         Type: <%= carry.carry_type.capitalize %></small>
     </div>
-    <p class="mb-1"><%= carry.description %></p>
+    <p class="mb-1"><%= html_escape(carry.description) %></p>
 
     <small>Starting Price: <%= wowGoldConverter(carry.price) %></small>
 
