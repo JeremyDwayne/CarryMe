@@ -1,5 +1,6 @@
 class Carry < ApplicationRecord
   belongs_to :user
+  belongs_to :character
   enum carry_type: [ :key, :raid, :pvp ]
   validates :carry_type, inclusion: { in: Carry.carry_types, message: "%{value} must be assigned" }
 
