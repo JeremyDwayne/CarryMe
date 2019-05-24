@@ -1,5 +1,9 @@
 <h5>Listing Preview</h5>
 <%= render 'show', carry: @carry, main: @carry.character %>
+<br/>
+<div class="container">
+  <%= @carry.content %>
+</div>
 
 <br/>
 <%= link_to 'Back', carries_path %>

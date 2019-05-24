@@ -74,7 +74,7 @@ class CarriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carry_params
-      params.require(:carry).permit(:title, :description, :carry_type, :price, :user_id, :character_id)
+      params.require(:carry).permit(:title, :description, :carry_type, :price, :user_id, :character_id, :content)
     end
 
     def verify_owner

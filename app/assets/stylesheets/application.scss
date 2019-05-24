@@ -27,6 +27,11 @@
     color: $white;
 }
 
+// main content was overlapped by footer
+body {
+  padding-bottom: 120px;
+}
+
 a {
   &:visited {
     color: $primary;

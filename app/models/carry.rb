@@ -3,6 +3,7 @@ class Carry < ApplicationRecord
   belongs_to :character
   enum carry_type: [ :key, :raid, :pvp ]
   validates :carry_type, inclusion: { in: Carry.carry_types, message: "%{value} must be assigned" }
+  has_rich_text :content
 
   def self.search(search, columns = nil)
     if search.present?
