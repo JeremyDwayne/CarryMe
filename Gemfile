@@ -18,7 +18,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'devise'
 gem 'omniauth-bnet'
 gem 'webpacker'
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.12'
 
 # Use CoffeeScript for .coffee assets and views
 # gem 'coffee-rails', '~> 4.2'
